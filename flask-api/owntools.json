@@ -1,0 +1,5 @@
+{
+  "name": "flask-api",
+  "description": "Flask API boilerplate, using Docker",
+  "tags": ["python", "python 3", "python 3.7.5", "api", "flask", "docker", "make"]
+}
