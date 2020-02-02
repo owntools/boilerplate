@@ -20,8 +20,7 @@ services:
     depends_on:
       - app
     environment:
-      API_HOST: 'app'
-      API_PORT: '5000'
+      API_URL: http://app:5000
       PYTHONPATH: .
     volumes:
       - ".:/usr/src/app"

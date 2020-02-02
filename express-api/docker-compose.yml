@@ -16,7 +16,6 @@ services:
     depends_on:
       - app
     environment:
-      API_HOST: 'app'
-      API_PORT: '3000'
+      API_URL: http://app:3000
     volumes:
       - ".:/usr/src/app"
