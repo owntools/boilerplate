@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  app:
+    build: .
+    image: owntools/python2
+    command: python app.py
+    environment:
+      PYTHONPATH: .
+    volumes:
+      - ".:/usr/src/app"
+    # for pdb
+    stdin_open: true
+    tty: true
