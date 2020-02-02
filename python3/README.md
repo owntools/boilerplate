@@ -33,5 +33,5 @@ Note that depending on the package, you may need to install some `apt` package p
 
 1. add `import pdb; pdb.set_trace()` breakpoint
 2. in one terminal, run `make debugger` to start the program and attach to it
-3. in another terminal, run `make test`, or hit http://localhost:5000 in your browser
+3. in another terminal, run `make test` to trigger the breakpoint (if not already triggered in step 2)
 4. the first terminal should pause at the breakpoint
