@@ -1,8 +1,8 @@
-### Boilerplate
+# Boilerplate
 
 Each boilerplate has the same `make` targets for running the program in development and running tests. These commands are documented below.
 
-#### Prerequisites
+## Prerequisites
 
 You must install the following on your development machine:
 
@@ -10,29 +10,38 @@ You must install the following on your development machine:
 2. `docker`
 3. `docker-compose`
 
-#### Develop
+## Develop
 
 ```sh
-make build run
+make
 ```
 
-or, if no dependencies changed, just `make` to avoid rebuilding the image.
+If dependencies changed, make sure to re-build with `make build run`.
 
-#### Test
+## Test
 
 ```sh
-make build test
+make test
 ```
 
-or, if no dependencies changed, just `make test`.
+If dependencies changed, make sure to re-build with `make build test`.
 
-#### Clean
+## Debug
+
+```sh
+# add a breakpoint in the code, then
+make debug
+```
+
+If developing an API, you can run `curl http://localhost:8080` or run `make test` to hit the breakpoint.
+
+## Clean
 
 ```sh
 make clean
 ```
 
-#### Add Packages
+## Add Packages
 
 ```sh
 # start the container and install using package manager
@@ -46,12 +55,3 @@ make shell
 ```
 
 Note that depending on the package, you may need to install some `apt` package prerequisites by adding them to the `Dockerfile`.
-
-#### Debug
-
-```sh
-# add a breakpoint in the code then run
-make debug
-```
-
-If building an API, you can run `curl http://localhost:8080` or run `make test` to hit the breakpoint.
