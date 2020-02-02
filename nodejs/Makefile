@@ -17,7 +17,7 @@ kill:
 logs:
 	@docker-compose logs app
 
-debugger: kill dbg
+debug: kill dbg
 
 remove:
 	@docker-compose rm -f -v
@@ -36,4 +36,4 @@ shell:
 test:
 	@docker-compose run --rm app yarn test
 
-.PHONY: attach build clean kill logs debugger remove run rund sh shell test
+.PHONY: attach build clean kill logs debug remove run rund sh shell test

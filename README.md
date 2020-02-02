@@ -16,7 +16,7 @@ You must install the following on your development machine:
 make build run
 ```
 
-or, if no dependencies changed, just `make` to avoid rebuilding the image
+or, if no dependencies changed, just `make` to avoid rebuilding the image.
 
 #### Test
 
@@ -24,7 +24,7 @@ or, if no dependencies changed, just `make` to avoid rebuilding the image
 make build test
 ```
 
-or, if no dependencies changed, just `make test`
+or, if no dependencies changed, just `make test`.
 
 #### Clean
 
@@ -32,26 +32,26 @@ or, if no dependencies changed, just `make test`
 make clean
 ```
 
-#### Install New Dependencies
+#### Add Packages
 
 ```sh
-# first, start the container
+# start the container and install using package manager
 make shell
-
-# then, using your package manager, add the package
 
 # e.g., for js,
 (container)> yarn add moment
 
 # or, for python,
-(container)> poetry add moment
+(container)> poetry add pytz
 ```
 
-Note that depending on the package, you may need to install some `apt` package prerequisites by adding them to the `Dockerfile`
+Note that depending on the package, you may need to install some `apt` package prerequisites by adding them to the `Dockerfile`.
 
 #### Debug
 
-1. add a breakpoint in the code
-2. in one terminal, run `make debugger` to start the program and attach to it
-3. in another terminal, run `make test`, or hit the API URL in your browser
-4. the first terminal should pause at the breakpoint
+```sh
+# add a breakpoint in the code then run
+make debug
+```
+
+If building an API, you can run `curl http://localhost:8080` or run `make test` to hit the breakpoint.

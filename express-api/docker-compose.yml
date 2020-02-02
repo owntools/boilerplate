@@ -4,6 +4,10 @@ services:
     build: .
     image: owntools/express-api
     command: yarn start
+    environment:
+      PORT: "8080"
+    ports:
+      - "8080:8080"
     volumes:
       - ".:/usr/src/app"
     # for debugger
@@ -12,10 +16,10 @@ services:
 
   test:
     image: owntools/express-api
-    command: /wait-for-it.sh app:3000 -- yarn test
+    command: /wait-for-it.sh app:8080 -- yarn test
     depends_on:
       - app
     environment:
-      API_URL: http://app:3000
+      API_URL: http://app:8080
     volumes:
       - ".:/usr/src/app"

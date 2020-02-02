@@ -5,9 +5,10 @@ services:
     image: owntools/flask-api
     command: python app.py
     environment:
+      PORT: "8080"
       PYTHONPATH: .
     ports:
-      - "5000:5000"
+      - "8080:8080"
     volumes:
       - ".:/usr/src/app"
     # for debugger
@@ -16,11 +17,11 @@ services:
 
   test:
     image: owntools/flask-api
-    command: /wait-for-it.sh app:5000 -- python test.py
+    command: /wait-for-it.sh app:8080 -- python test.py
     depends_on:
       - app
     environment:
-      API_URL: http://app:5000
+      API_URL: http://app:8080
       PYTHONPATH: .
     volumes:
       - ".:/usr/src/app"

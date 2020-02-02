@@ -14,7 +14,7 @@ kill:
 logs:
 	@docker-compose logs app
 
-debugger: kill rund logs attach
+debug: kill rund logs attach
 
 remove:
 	@docker-compose rm -f -v
@@ -33,4 +33,4 @@ shell:
 test:
 	@docker-compose run --rm test
 
-.PHONY: attach build clean kill logs debugger remove run rund sh shell test
+.PHONY: attach build clean kill logs debug remove run rund sh shell test
