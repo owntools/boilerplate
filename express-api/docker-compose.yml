@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+  app:
+    build: .
+    image: owntools/express-api
+    command: yarn start
+    volumes:
+      - ".:/usr/src/app"
+    # for debugger
+    stdin_open: true
+    tty: true
+
+  test:
+    image: owntools/express-api
+    command: /wait-for-it.sh app:3000 -- yarn test
+    depends_on:
+      - app
+    environment:
+      API_HOST: 'app'
+      API_PORT: '3000'
+    volumes:
+      - ".:/usr/src/app"

@@ -1,0 +1,5 @@
+{
+  "name": "express-api",
+  "description": "Express API boilerplate, using Docker",
+  "tags": ["JavaScript", "NodeJS", "node 12.14.1", "api", "express", "docker", "make"]
+}
