@@ -1,4 +1,4 @@
-default: start
+default: run
 
 attach:
 	@docker attach $(shell docker-compose ps -q app)
@@ -33,9 +33,7 @@ sh: shell
 shell:
 	@docker-compose run --rm app bash
 
-start: build run
-
 test:
 	@docker-compose run --rm app yarn test
 
-.PHONY: attach build clean kill logs debugger remove run rund sh shell start test
+.PHONY: attach build clean kill logs debugger remove run rund sh shell test

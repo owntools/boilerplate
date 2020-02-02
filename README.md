@@ -14,12 +14,9 @@ You must install the following on your development machine:
 
 ```sh
 make build run
-
-# aliased as
-make
 ```
 
-or, if no dependencies changed, just `make run` to avoid rebuilding the image
+or, if no dependencies changed, just `make` to avoid rebuilding the image
 
 #### Test
 
