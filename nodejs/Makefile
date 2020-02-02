@@ -8,13 +8,16 @@ build:
 
 clean: kill remove
 
+dbg:
+	@docker-compose run --rm app yarn dbg
+
 kill:
 	@docker-compose kill
 
 logs:
 	@docker-compose logs app
 
-debugger: kill rund logs attach
+debugger: kill dbg
 
 remove:
 	@docker-compose rm -f -v

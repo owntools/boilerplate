@@ -1,10 +1,10 @@
-### Boilerplates
+### Boilerplate
 
-Each of these boilerplates have the same `make` targets for running the program in development, and running tests. These commands are documented below.
+Each boilerplate has the same `make` targets for running the program in development and running tests. These commands are documented below.
 
 #### Prerequisites
 
-You must install the following:
+You must install the following on your development machine:
 
 1. `make`
 2. `docker`

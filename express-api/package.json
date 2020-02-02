@@ -14,6 +14,7 @@
     "supertest": "^4.0.2"
   },
   "scripts": {
+    "dbg": "babel-node debug app.js",
     "start": "babel-node app.js",
     "test": "jest --runInBand --detectOpenHandles"
   },
