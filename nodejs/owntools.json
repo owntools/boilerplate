@@ -1,0 +1,5 @@
+{
+  "name": "nodejs",
+  "description": "NodeJS boilerplate, using Docker",
+  "tags": ["JavaScript", "NodeJS", "node 12.14.1", "docker", "make"]
+}

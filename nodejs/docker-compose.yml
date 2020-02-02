@@ -1,0 +1,11 @@
+version: "3.7"
+services:
+  app:
+    build: .
+    image: owntools/nodejs
+    command: yarn start
+    volumes:
+      - ".:/usr/src/app"
+    # for debugger
+    stdin_open: true
+    tty: true
