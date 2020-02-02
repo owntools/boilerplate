@@ -1,6 +1,6 @@
 ### Boilerplates
 
-Each of these boilerplates have the same `make` targets for running the program in dev, and running tests. These commands are documented below.
+Each of these boilerplates have the same `make` targets for running the program in development, and running tests. These commands are documented below.
 
 #### Prerequisites
 
@@ -12,29 +12,43 @@ You must install the following:
 
 #### Develop
 
-    make build run
+```sh
+make build run
 
-or, if no dependencies changed, just `make` to avoid rebuilding the image
+# aliased as
+make
+```
+
+or, if no dependencies changed, just `make run` to avoid rebuilding the image
 
 #### Test
 
-    make build test
+```sh
+make build test
+```
 
 or, if no dependencies changed, just `make test`
 
 #### Clean
 
-    make clean
+```sh
+make clean
+```
 
 #### Install New Dependencies
 
-    make shell
+```sh
+# first, start the container
+make shell
 
-    # for python
-    (py-container)# poetry add pytz
+# then, using your package manager, add the package
 
-    # for nodejs
-    (js-container)# yarn add moment
+# e.g., for js,
+(container)> yarn add moment
+
+# or, for python,
+(container)> poetry add moment
+```
 
 Note that depending on the package, you may need to install some `apt` package prerequisites by adding them to the `Dockerfile`
 
