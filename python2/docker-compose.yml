@@ -8,6 +8,6 @@ services:
       PYTHONPATH: .
     volumes:
       - ".:/usr/src/app"
-    # for pdb
+    # for debugger
     stdin_open: true
     tty: true

@@ -29,9 +29,9 @@ or, if no dependencies changed, just `make test`
 
 Note that depending on the package, you may need to install some `apt` package prerequisites by adding them to the [`Dockerfile`](./Dockerfile)
 
-#### Debugger
+#### Debug
 
 1. add `import pdb; pdb.set_trace()` breakpoint
-2. in one terminal, run `make pdb` to start the program and attach to it
+2. in one terminal, run `make debugger` to start the program and attach to it
 3. in another terminal, run `make test`, or hit http://localhost:5000 in your browser
 4. the first terminal should pause at the breakpoint

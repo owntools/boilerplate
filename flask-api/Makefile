@@ -14,7 +14,7 @@ kill:
 logs:
 	@docker-compose logs app
 
-pdb: kill rund logs attach
+debugger: kill rund logs attach
 
 remove:
 	@docker-compose rm -f -v
@@ -35,4 +35,4 @@ start: build run
 test:
 	@docker-compose run --rm test
 
-.PHONY: attach build clean kill logs pdb remove run rund sh shell start test
+.PHONY: attach build clean kill logs debugger remove run rund sh shell start test
