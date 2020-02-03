@@ -39,3 +39,5 @@ services:
       SERVER_URL: http://server:8081
     volumes:
       - ".:/usr/src/app"
+      # ignore generated files
+      - /usr/src/app/node_modules

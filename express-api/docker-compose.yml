@@ -25,3 +25,5 @@ services:
       API_URL: http://app:8080
     volumes:
       - ".:/usr/src/app"
+      # ignore generated files
+      - /usr/src/app/node_modules
