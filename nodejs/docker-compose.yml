@@ -6,6 +6,8 @@ services:
     command: yarn start
     volumes:
       - ".:/usr/src/app"
+      # ignore generated files
+      - /usr/src/app/node_modules
     # for debugger
     stdin_open: true
     tty: true
