@@ -29,7 +29,7 @@ services:
     tty: true
 
   test:
-    image: owntools/react-webapp
+    build: .owntools
     # wait for server, then wait for react app to listen on host/port
     command: /wait-for-it.sh server:8081 -- /wait-for-it.sh app:8080 -- yarn test
     depends_on:
@@ -38,6 +38,6 @@ services:
       APP_URL: http://app:8080
       SERVER_URL: http://server:8081
     volumes:
-      - ".:/usr/src/app"
+      - "./.owntools:/usr/src/app"
       # ignore generated files
       - /usr/src/app/node_modules
