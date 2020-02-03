@@ -1,0 +1,5 @@
+{
+  "name": "react-webapp",
+  "description": "React boilerplate with Parcel bundler, using Docker",
+  "tags": ["JavaScript", "React", "frontend", "webapp", "parcel", "docker", "make"]
+}

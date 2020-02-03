@@ -1,0 +1,35 @@
+version: "3.7"
+services:
+  server:
+    build: server
+    command: yarn start
+    ports:
+      - "8081:8081"
+    volumes:
+      - "./server:/usr/src/app"
+
+  app:
+    build: .
+    image: owntools/react-webapp
+    command: yarn start
+    depends_on:
+      - server
+    ports:
+      - "8080:8080"
+    volumes:
+      - ".:/usr/src/app"
+    # for debugger
+    stdin_open: true
+    tty: true
+
+  test:
+    image: owntools/react-webapp
+    # wait for server, then wait for react app to listen on host/port
+    command: /wait-for-it.sh server:8081 -- /wait-for-it.sh app:8080 -- yarn test
+    depends_on:
+      - app
+    environment:
+      APP_URL: http://app:8080
+      SERVER_URL: http://server:8081
+    volumes:
+      - ".:/usr/src/app"
