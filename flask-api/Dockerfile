@@ -15,9 +15,6 @@ RUN poetry config virtualenvs.create false
 RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
 
-COPY wait-for-it.sh /wait-for-it.sh
-RUN chmod +x /wait-for-it.sh
-
 COPY pyproject.toml .
 COPY poetry.lock .
 RUN poetry install

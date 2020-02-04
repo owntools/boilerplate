@@ -8,10 +8,14 @@ ENV APP_HOME /usr/src/app
 RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
 
+# bake packages into the docker image & avoid volume sharing node_modules/ dir
+WORKDIR /usr/src
 COPY package.json .
-# COPY yarn.lock .
+COPY yarn.lock .
 RUN yarn install
+ENV PATH /usr/src/node_modules/.bin:$PATH
 
+WORKDIR $APP_HOME
 COPY . .
 
 CMD ["yarn", "start"]

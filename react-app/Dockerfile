@@ -6,15 +6,15 @@ ENV APP_HOME /usr/src/app
 # RUN apt-get update && apt-get install -y postgresql-client
 
 RUN mkdir -p $APP_HOME
-WORKDIR $APP_HOME
 
-COPY wait-for-it.sh /wait-for-it.sh
-RUN chmod +x /wait-for-it.sh
-
+# bake packages into the docker image & avoid volume sharing node_modules/ dir
+WORKDIR /usr/src
 COPY package.json .
 COPY yarn.lock .
 RUN yarn install
+ENV PATH /usr/src/node_modules/.bin:$PATH
 
+WORKDIR $APP_HOME
 COPY . .
 
 CMD ["yarn", "start"]

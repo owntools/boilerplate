@@ -1,0 +1,7 @@
+{
+  "baseUrl": "http://localhost:8080",
+  "serverUrl": "http://localhost:8081",
+  "projectId": "react-app",
+  "integrationFolder": "./spec",
+  "video": false
+}

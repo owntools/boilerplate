@@ -1,18 +1,18 @@
-import express from 'express'
-import morgan from 'morgan'
+import express from "express";
+import morgan from "morgan";
 
-const app = express()
-const port = parseInt((process.env.PORT || '3000'), 10)
+const app = express();
+const port = parseInt(process.env.PORT || "3000", 10);
 
 // logging middleware
-app.use(morgan('combined'))
+app.use(morgan("combined"));
 
-app.get('/', (req, res) => {
-  res.send('nothing yet')
-})
+app.get("/", (req, res) => {
+  res.json({ message: "nothing yet" });
+});
 
 if (require.main === module) {
-  app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+  app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 }
 
-export default app
+export default app;

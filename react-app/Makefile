@@ -4,12 +4,14 @@ attach:
 	@docker attach $(shell docker-compose ps -q app)
 
 build:
-	@docker-compose build app
+	@docker-compose build server app
 
 clean: kill remove
 
 dbg:
 	@docker-compose run --rm app yarn dbg
+
+debug: kill dbg
 
 kill:
 	@docker-compose kill
@@ -17,7 +19,8 @@ kill:
 logs:
 	@docker-compose logs app
 
-debug: kill dbg
+nuke:
+	@docker kill $(shell docker ps -q)
 
 remove:
 	@docker-compose rm -f -v
@@ -36,4 +39,4 @@ shell:
 test:
 	@docker-compose run --rm test
 
-.PHONY: attach build clean kill logs debug remove run rund sh shell test
+.PHONY: attach build clean debug kill logs nuke remove run rund sh shell test

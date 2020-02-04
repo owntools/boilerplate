@@ -4,7 +4,7 @@ from app import main
 
 class Test(unittest.TestCase):
     def test_retval(self):
-        self.assertNotEqual(main(), None)
+        self.assertEqual(main(), None)
 
 
 if __name__ == '__main__':
