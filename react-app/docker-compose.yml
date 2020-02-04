@@ -42,5 +42,5 @@ services:
       CYPRESS_baseUrl: http://app:8080
       CYPRESS_serverUrl: http://server:8081
     volumes:
-      - "./.owntools:/e2e"
+      - "./__owntools__:/e2e"
     working_dir: "/e2e"
