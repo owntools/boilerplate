@@ -1,15 +1,19 @@
-describe("posts API", () => {
-  const postsUrl = `${Cypress.config("serverUrl")}/posts`;
-  it("returns JSON", () => {
-    cy.request(postsUrl)
-      .its("headers")
-      .its("content-type")
-      .should("include", "application/json");
-  });
+const serverUrl = Cypress.config("serverUrl");
+const postsUrl = `${serverUrl}/posts`;
 
-  it("loads 1 item", () => {
-    cy.request(postsUrl)
-      .its("body")
-      .should("have.length", 1);
+describe("backend", () => {
+  describe("/posts", () => {
+    it("returns JSON", () => {
+      cy.request(postsUrl)
+        .its("headers")
+        .its("content-type")
+        .should("include", "application/json");
+    });
+
+    it("loads 1 item", () => {
+      cy.request(postsUrl)
+        .its("body")
+        .should("have.length", 1);
+    });
   });
 });
