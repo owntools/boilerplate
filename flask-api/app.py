@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def base_route():
-    return 'nothing yet'
+    return {'message': 'nothing yet'}
 
 
 if __name__ == "__main__":
