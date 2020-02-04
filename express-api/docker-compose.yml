@@ -10,8 +10,6 @@ services:
       - "8080:8080"
     volumes:
       - ".:/usr/src/app"
-      # ignore generated files
-      - /usr/src/app/node_modules
     # for debugger
     stdin_open: true
     tty: true

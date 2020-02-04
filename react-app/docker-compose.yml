@@ -7,8 +7,6 @@ services:
       - "8081:8081"
     volumes:
       - "./server:/usr/src/app"
-      # ignore generated files
-      - /usr/src/app/node_modules
 
   app:
     build: .
@@ -23,7 +21,6 @@ services:
       # ignore generated files
       - /usr/src/app/.cache
       - /usr/src/app/dist
-      - /usr/src/app/node_modules
     # for debugger
     stdin_open: true
     tty: true

@@ -4,7 +4,7 @@ attach:
 	@docker attach $(shell docker-compose ps -q app)
 
 build:
-	@docker-compose build server app test
+	@docker-compose build server app
 
 clean: kill remove
 
