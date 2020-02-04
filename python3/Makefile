@@ -34,6 +34,6 @@ shell:
 	@docker-compose run --rm app bash
 
 test:
-	@docker-compose run --rm app python test.py
+	@docker-compose run --rm app python __owntools__/test.py
 
 .PHONY: attach build clean debug kill logs nuke remove run rund sh shell test
