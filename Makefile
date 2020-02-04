@@ -1,7 +1,7 @@
 default: test
 
 nuke:
-	@docker kill $(shell docker ps -q)
+	@docker kill $(shell docker ps -q) || true
 
 test: nuke
 	@for dir in ./*/; do \
