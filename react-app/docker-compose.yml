@@ -33,8 +33,9 @@ services:
     ipc: host
     # 3.7.0 seems to be a known good version https://github.com/cypress-io/cypress/issues/349#issuecomment-570179689
     image: cypress/included:3.7.0
-    # wait for server, then wait for react app to listen on host/port
-    command: /wait-for-it.sh server:8081 -- /wait-for-it.sh app:8080 -- cypress run
+    # container run options
+    # entrypoint: bash
+    # command: --browser chrome
     depends_on:
       - app
     environment:
