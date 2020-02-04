@@ -29,15 +29,14 @@ services:
     tty: true
 
   test:
-    build: .owntools
+    # https://github.com/cypress-io/cypress/issues/350#issuecomment-267704772
+    ipc: host
+    # 3.7.0 seems to be a known good version https://github.com/cypress-io/cypress/issues/349#issuecomment-570179689
+    image: cypress/included:3.7.0
     # wait for server, then wait for react app to listen on host/port
-    command: /wait-for-it.sh server:8081 -- /wait-for-it.sh app:8080 -- yarn test
+    command: /wait-for-it.sh server:8081 -- /wait-for-it.sh app:8080 -- cypress run
     depends_on:
       - app
-    environment:
-      APP_URL: http://app:8080
-      SERVER_URL: http://server:8081
     volumes:
-      - "./.owntools:/usr/src/app"
-      # ignore generated files
-      - /usr/src/app/node_modules
+      - "./.owntools:/e2e"
+    working_dir: "/e2e"
