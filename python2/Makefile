@@ -8,13 +8,16 @@ build:
 
 clean: kill remove
 
+debug: kill rund logs attach
+
 kill:
 	@docker-compose kill
 
 logs:
 	@docker-compose logs app
 
-debug: kill rund logs attach
+nuke:
+	@docker kill $(shell docker ps -q)
 
 remove:
 	@docker-compose rm -f -v
@@ -33,4 +36,4 @@ shell:
 test:
 	@docker-compose run --rm app python test.py
 
-.PHONY: attach build clean kill logs debug remove run rund sh shell test
+.PHONY: attach build clean debug kill logs nuke remove run rund sh shell test

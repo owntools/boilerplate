@@ -42,4 +42,4 @@ test:
 unit:
 	@docker-compose run --rm app yarn test
 
-.PHONY: attach build clean kill logs debug remove run rund sh shell test
+.PHONY: attach build clean debug kill logs nuke remove run rund sh shell test
