@@ -17,13 +17,17 @@ services:
     tty: true
 
   test:
-    image: owntools/express-api
-    command: /wait-for-it.sh app:8080 -- yarn test
+    # https://github.com/cypress-io/cypress/issues/350#issuecomment-267704772
+    ipc: host
+    # 3.7.0 seems to be a known good version https://github.com/cypress-io/cypress/issues/349#issuecomment-570179689
+    image: cypress/included:3.7.0
+    # container run options
+    # entrypoint: bash
+    # command: --browser chrome
     depends_on:
       - app
     environment:
-      API_URL: http://app:8080
+      CYPRESS_serverUrl: http://app:8080
     volumes:
-      - ".:/usr/src/app"
-      # ignore generated files
-      - /usr/src/app/node_modules
+      - "./__owntools__:/e2e"
+    working_dir: "/e2e"

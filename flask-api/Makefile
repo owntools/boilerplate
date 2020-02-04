@@ -16,6 +16,9 @@ logs:
 
 debug: kill rund logs attach
 
+nuke:
+	@docker kill $(shell docker ps -q)
+
 remove:
 	@docker-compose rm -f -v
 

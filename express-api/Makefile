@@ -11,13 +11,16 @@ clean: kill remove
 dbg:
 	@docker-compose run --rm app yarn dbg
 
+debug: kill dbg
+
 kill:
 	@docker-compose kill
 
 logs:
 	@docker-compose logs app
 
-debug: kill dbg
+nuke:
+	@docker kill $(shell docker ps -q)
 
 remove:
 	@docker-compose rm -f -v
@@ -35,5 +38,8 @@ shell:
 
 test:
 	@docker-compose run --rm test
+
+unit:
+	@docker-compose run --rm app yarn test
 
 .PHONY: attach build clean kill logs debug remove run rund sh shell test
