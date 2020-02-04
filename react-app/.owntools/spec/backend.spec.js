@@ -1,4 +1,4 @@
-const serverUrl = Cypress.config("serverUrl");
+const serverUrl = Cypress.env("serverUrl");
 const postsUrl = `${serverUrl}/posts`;
 
 describe("backend", () => {

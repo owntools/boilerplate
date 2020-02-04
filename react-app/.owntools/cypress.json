@@ -1,6 +1,6 @@
 {
-  "baseUrl": "http://app:8080",
-  "serverUrl": "http://server:8081",
+  "baseUrl": "http://localhost:8080",
+  "serverUrl": "http://localhost:8081",
   "projectId": "react-app",
   "integrationFolder": "./spec",
   "video": false
