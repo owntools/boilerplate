@@ -10,14 +10,33 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Check docker daemon
-        run: docker ps
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: crazy-max/ghaction-docker-buildx@v1
+        with:
+          version: latest
 
-      - name: Build images
-        run: make build
+      - uses: actions/cache@v1
+        id: cache
+        with:
+          path: docker-cache
+          key: ${{ runner.os }}-docker-buildx-${{ hashFiles('**/Dockerfile') }}
+          restore-keys: |
+            ${{ runner.os }}-docker-buildx-
 
-      - name: Test all
-        run: make test
+      - name: Run Buildx
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          docker buildx build \
+            --cache-to=type=local,dest=docker-cache \
+            --tag owntools/react-app ./react-app
+
+          docker buildx build \
+            --cache-to=type=local,dest=docker-cache \
+            --tag owntools/json-server ./react-app/server
 
       - name: Check docker images
         run: docker images
+
+      - name: Test all
+        run: cd react-app && make test # make test
