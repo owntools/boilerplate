@@ -10,13 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # - uses: actions/cache@v1
-      #   id: cache
-      #   with:
-      #     path: docker-cache
-      #     key: ${{ runner.os }}-docker-buildx1-${{ hashFiles('**/Dockerfile') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-docker-buildx1-
+      - uses: actions/cache@v1
+        id: cache
+        with:
+          path: docker-cache
+          key: ${{ runner.os }}-docker-buildx2-${{ hashFiles('**/Dockerfile') }}
+          restore-keys: |
+            ${{ runner.os }}-docker-buildx1-
 
       - name: Set up Docker Buildx
         id: buildx
@@ -25,7 +25,7 @@ jobs:
           version: latest
 
       - name: Run Buildx
-        # if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           docker buildx build \
             --cache-to=type=local,dest=docker-cache \
