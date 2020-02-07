@@ -10,12 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: crazy-max/ghaction-docker-buildx@v1
-        with:
-          version: latest
-
       - uses: actions/cache@v1
         id: cache
         with:
@@ -24,16 +18,26 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-docker-buildx-
 
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: crazy-max/ghaction-docker-buildx@v1
+        with:
+          version: latest
+
       - name: Run Buildx
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
           docker buildx build \
             --cache-to=type=local,dest=docker-cache \
-            --tag owntools/react-app ./react-app
+            --output "type=image,push=false" \
+            --tag owntools/react-app \
+            --file ./react-app/Dockerfile ./react-app
 
           docker buildx build \
             --cache-to=type=local,dest=docker-cache \
-            --tag owntools/json-server ./react-app/server
+            --output "type=image,push=false" \
+            --tag owntools/json-server \
+            --file ./react-app/server/Dockerfile ./react-app/server
 
       - name: Check docker images
         run: docker images
