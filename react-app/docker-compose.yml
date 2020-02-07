@@ -1,7 +1,11 @@
 version: "3.7"
 services:
   server:
-    build: server
+    build:
+      context: server
+      cache_from:
+       - owntools/json-server
+    image: owntools/json-server
     command: yarn start
     ports:
       - "8081:8081"
@@ -9,8 +13,11 @@ services:
       - "./server:/usr/src/app"
 
   app:
-    build: .
-    image: owntools/react-webapp
+    build:
+      context: .
+      cache_from:
+       - owntools/react-app
+    image: owntools/react-app
     command: yarn start
     depends_on:
       - server

@@ -8,10 +8,92 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Check docker daemon
-      run: docker ps
-    - name: Test all
-      run: make test
-    - name: Check docker images
-      run: docker images
+      - uses: actions/checkout@v2
+
+      - name: Check docker daemon
+        run: docker ps
+
+      - uses: actions/cache@v1
+        id: cache
+        with:
+          path: docker-cache
+          key: ${{ runner.os }}-docker-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-docker-
+      - name: Load cached Docker layers
+        run: |
+          if [ -d "docker-cache" ]; then
+            cat docker-cache/react-app/x* > owntools-react-app.tar
+            docker load < owntools-react-app.tar
+            rm -rf docker-cache
+
+            cat docker-cache/python2/x* > owntools-python2.tar
+            docker load < owntools-python2.tar
+            rm -rf docker-cache
+
+            cat docker-cache/flask-api/x* > owntools-flask-api.tar
+            docker load < owntools-flask-api.tar
+            rm -rf docker-cache
+
+            cat docker-cache/python3/x* > owntools-python3.tar
+            docker load < owntools-python3.tar
+            rm -rf docker-cache
+
+            cat docker-cache/express-api/x* > owntools-express-api.tar
+            docker load < owntools-express-api.tar
+            rm -rf docker-cache
+
+            cat docker-cache/json-server/x* > owntools-json-server.tar
+            docker load < owntools-json-server.tar
+            rm -rf docker-cache
+
+            cat docker-cache/nodejs/x* > owntools-nodejs.tar
+            docker load < owntools-nodejs.tar
+            rm -rf docker-cache
+          fi
+      - name: Build images
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          make build
+          # builds
+          # owntools/react-app      latest              448f79446f95        5 minutes ago       1.12GB
+          # owntools/python2        latest              5d66e5238887        2 hours ago         925MB
+          # owntools/flask-api      latest              4fef91bb81b0        2 hours ago         213MB
+          # owntools/python3        latest              5bc07dc34482        3 hours ago         209MB
+          # owntools/express-api    latest              6de1427b5289        3 hours ago         1.03GB
+          # owntools/json-server    latest              3e3b2aaad03a        3 hours ago         947MB
+          # owntools/nodejs         latest              b3b2179079a6        3 hours ago         1.02GB
+
+          docker save owntools/react-app $(docker history -q owntools/react-app | awk '!/<missing>/{print}') > owntools-react-app.tar
+          mkdir docker-cache
+          split -b 2G owntools-react-app.tar docker-cache/react-app/x
+
+          docker save owntools/python2 $(docker history -q owntools/python2 | awk '!/<missing>/{print}') > owntools-python2.tar
+          mkdir docker-cache
+          split -b 2G owntools-python2.tar docker-cache/python2/x
+
+          docker save owntools/flask-api $(docker history -q owntools/flask-api | awk '!/<missing>/{print}') > owntools-flask-api.tar
+          mkdir docker-cache
+          split -b 2G owntools-flask-api.tar docker-cache/flask-api/x
+
+          docker save owntools/python3 $(docker history -q owntools/python3 | awk '!/<missing>/{print}') > owntools-python3.tar
+          mkdir docker-cache
+          split -b 2G owntools-python3.tar docker-cache/python3/x
+
+          docker save owntools/express-api $(docker history -q owntools/express-api | awk '!/<missing>/{print}') > owntools-express-api.tar
+          mkdir docker-cache
+          split -b 2G owntools-express-api.tar docker-cache/express-api/x
+
+          docker save owntools/json-server $(docker history -q owntools/json-server | awk '!/<missing>/{print}') > owntools-json-server.tar
+          mkdir docker-cache
+          split -b 2G owntools-json-server.tar docker-cache/json-server/x
+
+          docker save owntools/nodejs $(docker history -q owntools/nodejs | awk '!/<missing>/{print}') > owntools-nodejs.tar
+          mkdir docker-cache
+          split -b 2G owntools-nodejs.tar docker-cache/nodejs/x
+
+      - name: Test all
+        run: make test
+
+      - name: Check docker images
+        run: docker images

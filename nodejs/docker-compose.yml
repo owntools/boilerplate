@@ -1,7 +1,10 @@
 version: "3.7"
 services:
   app:
-    build: .
+    build:
+      context: .
+      cache_from:
+       - owntools/nodejs
     image: owntools/nodejs
     command: yarn start
     volumes:
