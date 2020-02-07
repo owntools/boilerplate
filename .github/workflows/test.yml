@@ -14,9 +14,9 @@ jobs:
         id: cache
         with:
           path: docker-cache
-          key: ${{ runner.os }}-docker-buildx-${{ hashFiles('**/Dockerfile') }}
+          key: ${{ runner.os }}-docker-buildx1-${{ hashFiles('**/Dockerfile') }}
           restore-keys: |
-            ${{ runner.os }}-docker-buildx-
+            ${{ runner.os }}-docker-buildx1-
 
       - name: Set up Docker Buildx
         id: buildx
