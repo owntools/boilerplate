@@ -1,3 +1,17 @@
+# to cache docker builds in CI
+IMAGE_NAME := owntools/python2
+IMAGE_FILE := owntools-python2.tar
+SPLIT_FOLDER := docker-cache/python2
+
+load:
+	cat $(SPLIT_FOLDER)/x* > $(IMAGE_FILE)
+	docker load < $(IMAGE_FILE)
+
+save:
+	docker save $(IMAGE_NAME) > $(IMAGE_FILE)
+	mkdir -p $(SPLIT_FOLDER)
+	split -b 2G $(IMAGE_FILE) $(SPLIT_FOLDER)/x
+
 default: run
 
 attach:
