@@ -13,3 +13,5 @@ jobs:
       run: docker ps
     - name: Test all
       run: make test
+    - name: Check docker images
+      run: docker images
