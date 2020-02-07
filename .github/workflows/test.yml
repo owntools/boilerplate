@@ -10,13 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: actions/cache@v1
-        id: cache
-        with:
-          path: docker-cache
-          key: ${{ runner.os }}-docker-buildx1-${{ hashFiles('**/Dockerfile') }}
-          restore-keys: |
-            ${{ runner.os }}-docker-buildx1-
+      # - uses: actions/cache@v1
+      #   id: cache
+      #   with:
+      #     path: docker-cache
+      #     key: ${{ runner.os }}-docker-buildx1-${{ hashFiles('**/Dockerfile') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-docker-buildx1-
 
       - name: Set up Docker Buildx
         id: buildx
@@ -25,22 +25,23 @@ jobs:
           version: latest
 
       - name: Run Buildx
-        if: steps.cache.outputs.cache-hit != 'true'
+        # if: steps.cache.outputs.cache-hit != 'true'
         run: |
           docker buildx build \
             --cache-to=type=local,dest=docker-cache \
-            --output "type=image,push=false" \
+            --load \
             --tag owntools/react-app \
-            --file ./react-app/Dockerfile ./react-app
+            --file ./react-app/Dockerfile \
+            ./react-app
 
-          docker buildx build \
-            --cache-to=type=local,dest=docker-cache \
-            --output "type=image,push=false" \
-            --tag owntools/json-server \
-            --file ./react-app/server/Dockerfile ./react-app/server
+          # docker buildx build \
+          #   --cache-to=type=local,dest=docker-cache \
+          #   --output "type=image,name=owntools/json-server,push=false" \
+          #   --tag owntools/json-server \
+          #   --file ./react-app/server/Dockerfile ./react-app/server
 
       - name: Check docker images
         run: docker images
 
-      - name: Test all
-        run: cd react-app && make test # make test
+      # - name: Test all
+      #   run: cd react-app && make test # make test
