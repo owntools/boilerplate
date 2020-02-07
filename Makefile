@@ -5,6 +5,5 @@ nuke:
 
 test: nuke
 	@for dir in ./*/; do \
-		$(MAKE) -C $$dir test; \
-		$(MAKE) -C $$dir clean; \
+		$(MAKE) -C $$dir build test clean; \
 	done

@@ -21,8 +21,8 @@ services:
     # 3.7.0 seems to be a known good version https://github.com/cypress-io/cypress/issues/349#issuecomment-570179689
     image: cypress/included:3.7.0
     # container run options
-    # entrypoint: bash
-    # command: --browser chrome
+    entrypoint: bash
+    command: /e2e/wait-for-it.sh app:8080 -- cypress run # --browser chrome
     depends_on:
       - app
     environment:
