@@ -20,6 +20,13 @@ jobs:
           image_name: owntools/nodejs
           context: nodejs
 
+      - uses: whoan/docker-build-with-cache-action@master
+        with:
+          username: owntools
+          password: "${{ secrets.DOCKER_PASSWORD }}"
+          image_name: owntools/express-api
+          context: express-api
+
       - name: Check docker images
         run: docker images
 
