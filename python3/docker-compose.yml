@@ -1,7 +1,10 @@
 version: "3.7"
 services:
   app:
-    build: .
+    build:
+      context: .
+      cache_from:
+       - owntools/python3
     image: owntools/python3
     command: python app.py
     environment:

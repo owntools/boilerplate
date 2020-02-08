@@ -1,0 +1,69 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Check docker daemon
+        run: docker ps
+
+      - uses: whoan/docker-build-with-cache-action@master
+        with:
+          username: owntools
+          password: "${{ secrets.DOCKER_PASSWORD }}"
+          image_name: owntools/nodejs
+          context: nodejs
+
+      - uses: whoan/docker-build-with-cache-action@master
+        with:
+          username: owntools
+          password: "${{ secrets.DOCKER_PASSWORD }}"
+          image_name: owntools/express-api
+          context: express-api
+
+      - uses: whoan/docker-build-with-cache-action@master
+        with:
+          username: owntools
+          password: "${{ secrets.DOCKER_PASSWORD }}"
+          image_name: owntools/flask-api
+          context: flask-api
+
+      - uses: whoan/docker-build-with-cache-action@master
+        with:
+          username: owntools
+          password: "${{ secrets.DOCKER_PASSWORD }}"
+          image_name: owntools/python2
+          context: python2
+
+      - uses: whoan/docker-build-with-cache-action@master
+        with:
+          username: owntools
+          password: "${{ secrets.DOCKER_PASSWORD }}"
+          image_name: owntools/python3
+          context: python3
+
+      - uses: whoan/docker-build-with-cache-action@master
+        with:
+          username: owntools
+          password: "${{ secrets.DOCKER_PASSWORD }}"
+          image_name: owntools/react-app
+          context: react-app
+
+      - uses: whoan/docker-build-with-cache-action@master
+        with:
+          username: owntools
+          password: "${{ secrets.DOCKER_PASSWORD }}"
+          image_name: owntools/json-server
+          context: react-app/server
+
+      - name: Check docker images
+        run: docker images
+
+      - name: Test all
+        run: make test
