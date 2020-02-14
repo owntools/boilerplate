@@ -14,7 +14,7 @@ dbg:
 debug: kill dbg
 
 kill:
-	@docker-compose kill
+	$(MAKE) -C __owntools__ kill
 
 logs:
 	@docker-compose logs app
@@ -23,7 +23,7 @@ nuke:
 	@docker kill $(shell docker ps -q)
 
 remove:
-	@docker-compose rm -f -v
+	$(MAKE) -C __owntools__ remove
 
 run:
 	@docker-compose up --remove-orphans app

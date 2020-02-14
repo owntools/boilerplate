@@ -4,7 +4,7 @@ services:
     build:
       context: .
       cache_from:
-       - owntools/express-api
+        - owntools/express-api
     image: owntools/express-api
     command: yarn start
     environment:
@@ -16,19 +16,3 @@ services:
     # for debugger
     stdin_open: true
     tty: true
-
-  test:
-    # https://github.com/cypress-io/cypress/issues/350#issuecomment-267704772
-    ipc: host
-    # 3.7.0 seems to be a known good version https://github.com/cypress-io/cypress/issues/349#issuecomment-570179689
-    image: cypress/included:3.7.0
-    # container run options
-    entrypoint: bash
-    command: /e2e/wait-for-it.sh app:8080 -- cypress run # --browser chrome
-    depends_on:
-      - app
-    environment:
-      CYPRESS_serverUrl: http://app:8080
-    volumes:
-      - "./__owntools__:/e2e"
-    working_dir: "/e2e"
