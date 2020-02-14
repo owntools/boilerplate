@@ -1,4 +1,5 @@
-# Boilerplate ![CI](https://github.com/owntools/boilerplate/workflows/CI/badge.svg)
+# Boilerplate
+![CI](https://github.com/owntools/boilerplate/workflows/CI/badge.svg)
 
 Each boilerplate has the same `make` targets for running the program in development and running tests. These commands are documented below.
 
