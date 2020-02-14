@@ -1,10 +1,11 @@
 {
   "name": "test",
   "devDependencies": {
-    "cypress": "^3.8.3"
+    "cypress": "^3.7.0"
   },
   "scripts": {
     "open": "cypress open",
-    "test": "cypress run"
+    "test": "cypress run",
+    "test:chrome": "cypress run --browser chrome"
   }
 }

@@ -4,7 +4,7 @@ services:
     build:
       context: server
       cache_from:
-       - owntools/json-server
+        - owntools/json-server
     image: owntools/json-server
     command: yarn start
     ports:
@@ -16,7 +16,7 @@ services:
     build:
       context: .
       cache_from:
-       - owntools/react-app
+        - owntools/react-app
     image: owntools/react-app
     command: yarn start
     depends_on:
