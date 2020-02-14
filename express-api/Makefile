@@ -4,7 +4,7 @@ attach:
 	@docker attach $(shell docker-compose ps -q app)
 
 build:
-	@docker-compose build app
+	$(MAKE) -C __owntools__ build
 
 clean: kill remove
 
@@ -37,7 +37,7 @@ shell:
 	@docker-compose run --rm app bash
 
 test:
-	@docker-compose run --rm test
+	$(MAKE) -C __owntools__ test
 
 unit:
 	@docker-compose run --rm app yarn test

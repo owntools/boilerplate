@@ -1,0 +1,11 @@
+version: "3.7"
+services:
+  test:
+    build: __owntools__
+    command: /wait-for-it.sh app:8080 -- yarn test
+    depends_on:
+      - app
+    environment:
+      API_URL: http://app:8080
+    volumes:
+      - "./__owntools__:/usr/src/app"
